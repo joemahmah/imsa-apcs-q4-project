@@ -1,6 +1,7 @@
 package core;
 
 public class Boot {
+
     /**
      * @param args the command line arguments
      */
