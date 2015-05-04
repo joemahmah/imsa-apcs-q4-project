@@ -6,6 +6,7 @@
 package core;
 
 import java.io.Serializable;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -13,4 +14,7 @@ import java.io.Serializable;
  */
 public class Map implements Serializable {
 
+    ImageIcon mapImage;
+    
+    
 }
