@@ -11,7 +11,7 @@ package core;
  */
 public class MapLogic {
 
-    Map map;
+    private Map map;
 
     public MapLogic() {
         map = null;

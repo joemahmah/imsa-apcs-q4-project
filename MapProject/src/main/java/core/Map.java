@@ -14,8 +14,8 @@ import javax.swing.ImageIcon;
  */
 public class Map implements Serializable {
 
-    ImageIcon mapImage;
-    MapLogic logic;
+    private ImageIcon mapImage;
+    private MapLogic logic;
 
     public Map() {
         logic = new MapLogic();
