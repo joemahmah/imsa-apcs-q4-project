@@ -19,4 +19,21 @@ public class Coordinate {
         this.y = y;
     }
     
+    public int getX(){
+        return x;
+    }
+    
+    public int getY(){
+        return y;
+    }
+    
+    public static Coordinate add(Coordinate... coordinates){
+        Coordinate finalCoord = new Coordinate(0, 0);
+        
+        for(Coordinate coord: coordinates){
+            finalCoord = new Coordinate(finalCoord.getX() + coord.getX(), finalCoord.getY() + coord.getY());
+        }
+        
+        return finalCoord;
+    }
 }
