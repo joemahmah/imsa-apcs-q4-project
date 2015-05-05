@@ -10,5 +10,14 @@ package core;
  * @author mhrcek
  */
 public class MapLogic {
-    
+
+    Map map;
+
+    public MapLogic() {
+        map = null;
+    }
+
+    public void linkMap(Map map) {
+        this.map = map;
+    }
 }
