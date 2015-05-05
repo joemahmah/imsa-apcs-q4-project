@@ -21,5 +21,13 @@ public class Map implements Serializable {
         logic = new MapLogic();
         logic.linkMap(this);
     }
+    
+    public ImageIcon getMapImage(){
+        return mapImage;
+    }
+    
+    public MapLogic getMapLogic(){
+        return logic;
+    }
 
 }
