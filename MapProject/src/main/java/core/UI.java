@@ -18,8 +18,9 @@ import javax.swing.JFrame;
 public class UI extends JFrame {
 
     private Panel mapPanel;
+    private Map map;
 
-    public UI(int x, int y) {
+    public UI(int x, int y, Map map) {
         setLayout(new GridLayout(2, 2));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(Color.WHITE);
@@ -28,7 +29,10 @@ public class UI extends JFrame {
         setVisible(true);
 
         mapPanel = new Panel();
+        this.map = map;
 
+        mapPanel.getGraphics().drawImage(map.getMapImage().getImage(), y, y, mapPanel);
+        
         addComponents();
     }
 
