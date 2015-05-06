@@ -19,7 +19,7 @@ public class Boot {
         }
 
         try {
-            UI ui = new UI(800, 600, map);
+            UI ui = new UI(490, 580, map);
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }

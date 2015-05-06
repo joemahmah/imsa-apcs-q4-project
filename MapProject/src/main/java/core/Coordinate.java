@@ -21,6 +21,11 @@ public class Coordinate {
         this.name=name;
     }
     
+    public Coordinate(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    
     public int getX(){
         return x;
     }
@@ -34,10 +39,10 @@ public class Coordinate {
     }
     
     public static Coordinate add(Coordinate... coordinates){
-        Coordinate finalCoord = new Coordinate(0, 0,"0");
+        Coordinate finalCoord = new Coordinate(0, 0);
         
         for(Coordinate coord: coordinates){
-            //finalCoord = new Coordinate(finalCoord.getX() + coord.getX(), finalCoord.getY() + coord.getY());
+            finalCoord = new Coordinate(finalCoord.getX() + coord.getX(), finalCoord.getY() + coord.getY());
         }
         
         return finalCoord;

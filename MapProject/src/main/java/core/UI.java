@@ -11,6 +11,11 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -26,21 +31,61 @@ public class UI extends JFrame {
 
     private ImagePanel mapPanel;
     private Map map;
+    private MouseListener listener;
+    private List<Coordinate> ralyCoordinates;
 
     public UI(int x, int y, Map map) {
+        ralyCoordinates = new ArrayList<>();
+        
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(x, y));
         setSize(new Dimension(x, y));
+        setResizable(false);
 
         this.map = map;
         this.mapPanel = new ImagePanel(map);
 
         addComponents();
+        addListeners();
+        
         setVisible(true);
     }
 
+    private void addListeners(){
+        listener = new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                ralyCoordinates.add(new Coordinate((int) getMousePosition().getX(),(int) getMousePosition().getY() - 30));
+                System.out.println("Added new coordinate at " + ralyCoordinates.get(ralyCoordinates.size()-1).getX() + "," + ralyCoordinates.get(ralyCoordinates.size()-1).getY() + ".");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent me) {
+                
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                
+            }
+        };
+        
+        addMouseListener(listener);
+    }
+    
     private void addComponents() {
 
         add(mapPanel);
