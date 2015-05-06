@@ -7,10 +7,14 @@ package core;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import main.java.core.Map;
 
@@ -24,17 +28,17 @@ public class UI extends JFrame {
     private Map map;
 
     public UI(int x, int y, Map map) {
-        setLayout(new GridLayout(2, 2));
+        setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(x, y));
         setSize(new Dimension(x, y));
-        setVisible(true);
 
         this.map = map;
         this.mapPanel = new ImagePanel(map);
 
         addComponents();
+        setVisible(true);
     }
 
     private void addComponents() {
@@ -42,25 +46,13 @@ public class UI extends JFrame {
         add(mapPanel);
     }
 
-    private class ImagePanel extends JPanel {
+    private class ImagePanel extends JLabel {
 
-        Image mapImage;
+        ImageIcon mapImage;
 
         private ImagePanel(Map map) {
-            mapImage = map.getMapImage();
-        }
-
-        @Override
-        public void paintComponent(Graphics g) {
-            if (mapImage == null) {
-                return;
-            }
-
-            int imageWidth = mapImage.getWidth(this);
-            int imageHeight = mapImage.getHeight(this);
-
-            g.drawImage(mapImage, 50, 50, this);
-
+            mapImage = new ImageIcon(map.getMapImage());
+            setIcon(mapImage);
         }
     }
 
