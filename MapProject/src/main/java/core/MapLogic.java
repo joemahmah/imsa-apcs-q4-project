@@ -51,6 +51,6 @@ public class MapLogic {
      * @return 
      */
     public Path calcPath(Coordinate start, Coordinate end){
-        
+        return null;
     }
 }
