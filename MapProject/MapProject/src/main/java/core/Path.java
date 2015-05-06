@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.core;
-
-import javax.swing.JFrame;
+package core;
 
 /**
  *
  * @author mhrcek
  */
-public class UI extends JFrame {
-
+public class Path {
+    
 }
