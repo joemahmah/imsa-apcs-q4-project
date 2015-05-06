@@ -8,7 +8,14 @@ public class Boot {
     public static void main(String[] args) {
 
         Map map = new Map();
-        map.addMapImage(IO_Logic.loadImage("IMSAMap.png"));
+
+        try {
+            map.addMapImage(IO_Logic.loadImage("IMSAMap.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.exit(404);
+        }
 
         UI ui = new UI(800, 600, map);
     }

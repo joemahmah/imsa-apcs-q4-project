@@ -5,6 +5,7 @@
  */
 package core;
 
+import java.awt.Image;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 
@@ -14,7 +15,7 @@ import javax.swing.ImageIcon;
  */
 public class Map implements Serializable {
 
-    private ImageIcon mapImage;
+    private Image mapImage;
     private MapLogic logic;
 
     public Map() {
@@ -22,11 +23,11 @@ public class Map implements Serializable {
         logic.linkMap(this);
     }
     
-    public void addMapImage(ImageIcon mapImage){
+    public void addMapImage(Image mapImage){
         this.mapImage = mapImage;
     }
     
-    public ImageIcon getMapImage(){
+    public Image getMapImage(){
         return mapImage;
     }
     
