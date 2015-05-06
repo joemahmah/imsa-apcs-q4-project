@@ -5,6 +5,7 @@
  */
 package main.java.core;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -45,13 +46,13 @@ public class MapLogic {
      * Defines the bounds of the map via color id.
      */
     public void analyzeMap() {
-        ImageIcon mapImage = map.getMapImage();
+        Image mapImage = map.getMapImage();
 
-        for (int x = 0; x < mapImage.getIconWidth(); x++) {
-            for (int y = 0; y < mapImage.getIconHeight(); y++) {
-                //Look for black on map && mark as bounds
-            }
-        }
+//        for (int x = 0; x < mapImage.getWidth(); x++) {
+//            for (int y = 0; y < mapImage.getHeight(); y++) {
+//                //Look for black on map && mark as bounds
+//            }
+//        }
     }
     
     /**
@@ -87,6 +88,6 @@ public class MapLogic {
      * @return 
      */
     public Path calcPath(Coordinate start, Coordinate end){
-        
+        return null;
     }
 }

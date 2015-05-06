@@ -5,10 +5,21 @@
  */
 package main.java.core;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author mhrcek
  */
 public class IO_Logic {
 
+    public static Image loadImage(String path) throws IOException{
+        return ImageIO.read(new File(path));
+    }
+    
 }
