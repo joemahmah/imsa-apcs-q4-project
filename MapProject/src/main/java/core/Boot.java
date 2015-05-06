@@ -10,9 +10,9 @@ public class Boot {
         Map map = new Map();
 
         try {
-            map.addMapImage(IO_Logic.loadImage("IMSAMap.png"));
+            map.addMapImage(IO_Logic.loadImage("/home/mhrcek/NetBeansProjects/APCS_Q4/imsa-apcs-q4-project/MapProject/src/main/resources/IMSAMap.PNG"));
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         } finally {
             System.exit(404);
         }
