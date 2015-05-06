@@ -22,6 +22,10 @@ public class Map implements Serializable {
         logic.linkMap(this);
     }
     
+    public void addMapImage(ImageIcon mapImage){
+        this.mapImage = mapImage;
+    }
+    
     public ImageIcon getMapImage(){
         return mapImage;
     }

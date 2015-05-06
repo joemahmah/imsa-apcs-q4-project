@@ -5,10 +5,16 @@
  */
 package core;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author mhrcek
  */
 public class IO_Logic {
 
+    public static ImageIcon loadImage(String path){
+        return new ImageIcon(path);
+    }
+    
 }
