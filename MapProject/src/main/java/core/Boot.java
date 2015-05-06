@@ -1,4 +1,6 @@
-package main.java.core;
+package core;
+
+import main.java.core.Map;
 
 public class Boot {
 
@@ -10,13 +12,16 @@ public class Boot {
         Map map = new Map();
 
         try {
-            map.addMapImage(IO_Logic.loadImage("/home/mhrcek/NetBeansProjects/APCS_Q4/imsa-apcs-q4-project/MapProject/src/main/resources/IMSAMap.PNG"));
+            map.addMapImage(IO_Logic.loadImage("/home/mhrcek/NetBeansProjects/APCS_Q4_2/imsa-apcs-q4-project/IMSAMap.PNG"));
         } catch (Exception e) {
             e.printStackTrace(System.err);
-        } finally {
             System.exit(404);
         }
 
-        UI ui = new UI(800, 600, map);
+        try {
+            UI ui = new UI(800, 600, map);
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
     }
 }

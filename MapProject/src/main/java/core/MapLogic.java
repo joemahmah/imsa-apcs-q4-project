@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.core;
+package core;
 
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import main.java.core.Map;
 
 /**
  *
@@ -59,28 +60,28 @@ public class MapLogic {
      * Finds the closest vertex
      * 
      */
-    public Coordinate findClosest(Coordinate init)
-    {
-        Coordinite start = init;
-        bounds.remove(init);
-        double distance = 730.0;
-        Coordinate end = new Coordinate(0,0,"0");
-        for(Coordinate tryCoord: bounds)
-        {
-            if(!badVertices.contains(tryCoord))
-            {
-                double d = init.getDistance(tryCoord);
-                if(d<distance)
-                {
-                    distance = d;
-                    end = tryCoord;
-                }
-            }
-        }
-        bounds.add(init);
-        //add in black line detector part?
-        return end;
-    }
+//    public Coordinate findClosest(Coordinate init)
+//    {
+//        Coordinite start = init;
+//        bounds.remove(init);
+//        double distance = 730.0;
+//        Coordinate end = new Coordinate(0,0,"0");
+//        for(Coordinate tryCoord: bounds)
+//        {
+//            if(!badVertices.contains(tryCoord))
+//            {
+//                double d = init.getDistance(tryCoord);
+//                if(d<distance)
+//                {
+//                    distance = d;
+//                    end = tryCoord;
+//                }
+//            }
+//        }
+//        bounds.add(init);
+//        //add in black line detector part?
+//        return end;
+//    }
     /**
      * Calculates the shortest route from start to finish.
      * @param start The user's starting position.

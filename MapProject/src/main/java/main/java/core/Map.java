@@ -5,6 +5,7 @@
  */
 package main.java.core;
 
+import core.MapLogic;
 import java.awt.Image;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
