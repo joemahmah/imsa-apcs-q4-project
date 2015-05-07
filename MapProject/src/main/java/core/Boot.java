@@ -1,7 +1,5 @@
 package core;
 
-import main.java.core.Map;
-
 public class Boot {
 
     /**
