@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -36,7 +37,7 @@ public class UI extends JFrame {
     private MouseListener listener;
     private List<Coordinate> ralyCoordinates;
 
-    public UI(int x, int y, Map map) {
+    public UI(int x, int y, Map map, String imageLocation) throws IOException {
         ralyCoordinates = new ArrayList<>();
 
         setLayout(new FlowLayout());
@@ -47,7 +48,7 @@ public class UI extends JFrame {
         setResizable(false);
 
         this.map = map;
-        this.mapPanel = new ImagePanel(map);
+        this.mapPanel = new ImagePanel(imageLocation);
 
         addComponents();
         addListeners();
@@ -130,8 +131,8 @@ public class UI extends JFrame {
 
         ImageIcon mapImage;
 
-        private ImagePanel(Map map) {
-            mapImage = new ImageIcon(map.getMapImage());
+        private ImagePanel(String imageLocation) throws IOException {
+            mapImage = new ImageIcon(IO_Logic.loadImage(imageLocation));
             setIcon(mapImage);
         }
     }

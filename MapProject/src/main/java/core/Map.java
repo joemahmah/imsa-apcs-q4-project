@@ -19,9 +19,11 @@ import javax.swing.JOptionPane;
  */
 public class Map implements Serializable {
 
-    private Image mapImage;
+//    private Image mapImage;
     private MapLogic logic;
     private List<Coordinate> mapPoints;
+
+    private static final long serialVersionUID = 6463760593940686409L;
 
     public Map() {
         logic = new MapLogic();
@@ -43,18 +45,18 @@ public class Map implements Serializable {
             mapPoints.add(coord);
         }
     }
-    
-    public List<Coordinate> getMapPoints(){
+
+    public List<Coordinate> getMapPoints() {
         return mapPoints;
     }
 
-    public void addMapImage(Image mapImage) {
-        this.mapImage = mapImage;
-    }
-
-    public Image getMapImage() {
-        return mapImage;
-    }
+//    public void addMapImage(Image mapImage) {
+//        this.mapImage = mapImage;
+//    }
+//
+//    public Image getMapImage() {
+//        return mapImage;
+//    }
 
     public MapLogic getMapLogic() {
         return logic;

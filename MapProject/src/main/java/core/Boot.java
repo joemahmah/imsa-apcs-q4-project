@@ -10,14 +10,14 @@ public class Boot {
         Map map = new Map();
 
         try {
-            map.addMapImage(IO_Logic.loadImage("/home/mhrcek/NetBeansProjects/APCS_Q4_2/imsa-apcs-q4-project/IMSAMap.PNG"));
+//            map.addMapImage(IO_Logic.loadImage("/home/mhrcek/NetBeansProjects/APCS_Q4_2/imsa-apcs-q4-project/IMSAMap.PNG"));
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(404);
         }
 
         try {
-            UI ui = new UI(490, 580, map);
+            UI ui = new UI(490, 580, map,"/home/mhrcek/NetBeansProjects/APCS_Q4_2/imsa-apcs-q4-project/IMSAMap.PNG");
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
