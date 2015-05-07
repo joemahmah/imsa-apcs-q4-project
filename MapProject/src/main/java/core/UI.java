@@ -12,6 +12,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -20,8 +22,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import main.java.core.Map;
 
 /**
  *
@@ -36,7 +38,7 @@ public class UI extends JFrame {
 
     public UI(int x, int y, Map map) {
         ralyCoordinates = new ArrayList<>();
-        
+
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(Color.WHITE);
@@ -49,43 +51,76 @@ public class UI extends JFrame {
 
         addComponents();
         addListeners();
-        
+
         setVisible(true);
     }
 
-    private void addListeners(){
+    private void addListeners() {
         listener = new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent me) {
-                ralyCoordinates.add(new Coordinate((int) getMousePosition().getX(),(int) getMousePosition().getY() - 30));
-                System.out.println("Added new coordinate at " + ralyCoordinates.get(ralyCoordinates.size()-1).getX() + "," + ralyCoordinates.get(ralyCoordinates.size()-1).getY() + ".");
+//                ralyCoordinates.add(new Coordinate((int) getMousePosition().getX(),(int) getMousePosition().getY() - 30));
+                map.addPoints(new Coordinate((int) getMousePosition().getX(), (int) getMousePosition().getY()));
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                
+
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                
+
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                
+
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
+
+            }
+        };
+
+        KeyListener keyListen = new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent ke) {
+                if (ke.getKeyChar() == 'p') {
+
+                    List<Coordinate> coords = map.getMapPoints();
+                    for (Coordinate coord : coords) {
+                        System.out.println(coord.getName() + ": " + coord.getX() + "," + coord.getY());
+                    }
+                }
+                
+                if(ke.getKeyChar() == 's'){
+                    IO_Logic.saveMap(JOptionPane.showInputDialog("Save path:"), map);
+                }
+                
+                if(ke.getKeyChar() == 'l'){
+                    map = IO_Logic.loadMap(JOptionPane.showInputDialog("File location:"));
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent ke) {
+                
+            }
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
                 
             }
         };
-        
+
         addMouseListener(listener);
+        addKeyListener(keyListen);
     }
-    
+
     private void addComponents() {
 
         add(mapPanel);
