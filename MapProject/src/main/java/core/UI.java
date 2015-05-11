@@ -37,6 +37,7 @@ public class UI extends JFrame {
     private MouseListener listener;
     private List<Coordinate> ralyCoordinates;
     private List<Coordinate> snapCoordinates;
+    private String mapLocation;
 
     public UI(int x, int y, Map map, String imageLocation) throws IOException {
         ralyCoordinates = new ArrayList<>();
@@ -71,6 +72,7 @@ public class UI extends JFrame {
                 }
                 
                 ralyCoordinates.add(nearest);
+                System.out.println(nearest.getName());
 //                map.addPoints(new Coordinate((int) getMousePosition().getX(), (int) getMousePosition().getY()));
 //                syncLocations();
 
@@ -135,7 +137,7 @@ public class UI extends JFrame {
                 }
 
                 if (ke.getKeyChar() == 'l') {
-                    map = IO_Logic.loadMap(JOptionPane.showInputDialog("File location:"));
+                    map = IO_Logic.loadMap(mapLocation = JOptionPane.showInputDialog("File location:"));
                     syncLocations();
                 }
             }
@@ -196,6 +198,8 @@ public class UI extends JFrame {
                 for (int i = 0; i < path.getCoords().size() - 1; i++) {
                     g.drawLine(path.getCoords().get(i).getX(), path.getCoords().get(i).getY()-30, path.getCoords().get(i + 1).getX(), path.getCoords().get(i + 1).getY()-30);
                 }
+                
+                map = IO_Logic.loadMap(mapLocation);
             }
         }
     }

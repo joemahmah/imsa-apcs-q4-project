@@ -26,7 +26,7 @@ public class Path {
     public void addCoordinate(Coordinate... coords){
         for(Coordinate coord: coords){
             this.coords.add(coord);
-            System.err.println(coord.getName());
+//            System.err.println(coord.getName());
         }
     }
     
@@ -53,6 +53,15 @@ public class Path {
         }
         
         return false;
+    }
+    
+    public double getTotalLength(){
+        double distance = 0;
+        for(int i=0; i<coords.size()-2; i++){
+            distance += Coordinate.distance(coords.get(i), coords.get(i+1));
+        }
+        
+        return distance;
     }
     
 }
