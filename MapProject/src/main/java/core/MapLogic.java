@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 /**
@@ -94,15 +95,28 @@ public class MapLogic implements Serializable {
      * @return
      */
     public Path calcPath(Coordinate start, Coordinate end) {
-        
-        Path path = new Path(start);
-        
-        while(!path.contains(end)){
-            path.addCoordinate(getNearest(path.getCoordsAsArray()));
+
+        List<Path> paths = new ArrayList<>();
+
+        for (int i = 0; i < 100; i++) {
+            paths.add(new Path(start));
+        }
+
+        for (Path path : paths) {
+            while (!path.contains(end)) {
+                path.addCoordinate(getNearest(path.getCoordsAsArray()));
+            }
         }
         
-        return path;
-        
+        Path shortest = paths.get(0);
+        for(Path path: paths){
+            if(path.getTotalLength() < shortest.getTotalLength()){
+                shortest = path;
+            }
+        }
+
+        return shortest;
+
     }
 
     Coordinate getNearestRoom(int x, int y) {
@@ -116,28 +130,28 @@ public class MapLogic implements Serializable {
         for (Coordinate location : rooms) {
             double distNear = Coordinate.distance(nearest, new Coordinate(x, y));
             double distCoord = Coordinate.distance(location, new Coordinate(x, y));
-            
-            if(distCoord < distNear){
+
+            if (distCoord < distNear) {
                 nearest = location;
             }
         }
-        
+
         return nearest;
     }
-    
+
     Coordinate getNearest(Coordinate... exclude) {
         List<Coordinate> rooms = map.getMapPoints();
         rooms.addAll(map.getMapTransferPoints());
 
         List<Coordinate> ignoreList = new ArrayList<>();
-        for(Coordinate coord: exclude){
+        for (Coordinate coord : exclude) {
             ignoreList.add(coord);
         }
-        
-        Coordinate lastNode = ignoreList.get(ignoreList.size()-1);
-        
+
+        Coordinate lastNode = ignoreList.get(ignoreList.size() - 1);
+
         rooms.removeAll(ignoreList);
-        
+
         if (rooms.size() < 1) {
             return null;
         }
@@ -146,12 +160,35 @@ public class MapLogic implements Serializable {
         for (Coordinate location : rooms) {
             double distNear = Coordinate.distance(nearest, lastNode);
             double distCoord = Coordinate.distance(location, lastNode);
-            
-            if(distCoord < distNear){
+
+            if (distCoord < distNear) {
                 nearest = location;
             }
         }
-        
+
+        return nearest;
+    }
+
+    Coordinate getRandom(Coordinate... exclude) {
+        List<Coordinate> rooms = map.getMapPoints();
+        rooms.addAll(map.getMapTransferPoints());
+
+        List<Coordinate> ignoreList = new ArrayList<>();
+        for (Coordinate coord : exclude) {
+            ignoreList.add(coord);
+        }
+
+        Coordinate lastNode = ignoreList.get(ignoreList.size() - 1);
+
+        rooms.removeAll(ignoreList);
+
+        if (rooms.size() < 1) {
+            return null;
+        }
+
+        Random rand = new Random();
+        Coordinate nearest = rooms.get(rand.nextInt(rooms.size()));
+
         return nearest;
     }
 }
