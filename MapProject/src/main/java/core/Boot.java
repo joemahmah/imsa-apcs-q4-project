@@ -18,13 +18,13 @@ public class Boot {
         }
 
         try {
-            ui = new UI(640, 480, map,"map.png");
+            ui = new UI(640, 480, map,"/home/mhrcek/Desktop/map.png");
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
         
         try{
-            ui.load("map.dat");
+            ui.load("/home/mhrcek/Desktop/map.mf");
         } catch(Exception e){
             System.err.println("Unable to load default map data file... Press 'l' to load file!");
         }

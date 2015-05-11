@@ -55,7 +55,7 @@ public class Map implements Serializable {
             if (point.getName() != null) {
                 coord = new Coordinate(point.getX(), point.getY(), point.getName());
             } else {
-                coord = new Coordinate(point.getX(), point.getY(), JOptionPane.showInputDialog("Location?"));
+                coord = new Coordinate(point.getX(), point.getY(), "");//JOptionPane.showInputDialog("Location?"));
             }
 
             mapTransferPoints.add(coord);

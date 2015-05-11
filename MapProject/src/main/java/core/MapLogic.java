@@ -104,13 +104,15 @@ public class MapLogic implements Serializable {
 
         for (Path path : paths) {
             while (!path.contains(end)) {
-                path.addCoordinate(getNearest(path.getCoordsAsArray()));
+                path.addCoordinate(getRandom(end, path, path.getCoordsAsArray()));
             }
+            System.out.print("/");
         }
-        
+        System.out.println("");
+
         Path shortest = paths.get(0);
-        for(Path path: paths){
-            if(path.getTotalLength() < shortest.getTotalLength()){
+        for (Path path : paths) {
+            if (path.getTotalLength() < shortest.getTotalLength()) {
                 shortest = path;
             }
         }
@@ -169,7 +171,7 @@ public class MapLogic implements Serializable {
         return nearest;
     }
 
-    Coordinate getRandom(Coordinate... exclude) {
+    Coordinate getRandom(Coordinate endCoord, Path path, Coordinate... exclude) {
         List<Coordinate> rooms = map.getMapPoints();
         rooms.addAll(map.getMapTransferPoints());
 
@@ -185,9 +187,32 @@ public class MapLogic implements Serializable {
         if (rooms.size() < 1) {
             return null;
         }
+        
+        if(Coordinate.distance(endCoord, lastNode) < 40){
+            return endCoord;
+        }
 
+//        for(Coordinate coord: rooms){
+//            System.err.println(Coordinate.distance(coord, lastNode));
+//        }
+//        System.err.println("\n\n");
         Random rand = new Random();
-        Coordinate nearest = rooms.get(rand.nextInt(rooms.size()));
+        Coordinate nearest;
+        do {
+
+            System.err.print(""); //No clue why it's needed but it is...
+            if (rooms.size() == 0) {
+                path.addCoordinate(new Coordinate(90000, 90000));
+                return endCoord;
+            }
+
+            nearest = rooms.get(rand.nextInt(rooms.size()));
+
+            if (Coordinate.distance(nearest, lastNode) > 40) {
+                rooms.remove(nearest);
+            }
+//            System.err.println(Coordinate.distance(nearest, lastNode));
+        } while (Coordinate.distance(nearest, lastNode) > 40);
 
         return nearest;
     }
