@@ -64,4 +64,9 @@ public class Coordinate implements Serializable{
         double distance = Math.sqrt(Math.pow((x - x2), 2) + Math.pow((y - y2), 2));
         return distance;
     }
+    
+    public static double distance(Coordinate coord1, Coordinate coord2) {
+        double distance = Math.sqrt(Math.pow((coord1.getX() - coord2.getX()), 2) + Math.pow((coord1.getY() - coord2.getY()), 2));
+        return distance;
+    }
 }

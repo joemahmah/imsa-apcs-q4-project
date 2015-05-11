@@ -17,7 +17,7 @@ public class Boot {
         }
 
         try {
-            UI ui = new UI(490, 580, map,"/home/mhrcek/NetBeansProjects/APCS_Q4_2/imsa-apcs-q4-project/IMSAMap.PNG");
+            UI ui = new UI(640, 480, map,"/home/mhrcek/Desktop/map.png");
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }

@@ -94,6 +94,64 @@ public class MapLogic implements Serializable {
      * @return
      */
     public Path calcPath(Coordinate start, Coordinate end) {
-        return null;
+        
+        Path path = new Path(start);
+        
+        while(!path.contains(end)){
+            path.addCoordinate(getNearest(path.getCoordsAsArray()));
+        }
+        
+        return path;
+        
+    }
+
+    Coordinate getNearestRoom(int x, int y) {
+        List<Coordinate> rooms = map.getMapPoints();
+
+        if (rooms.size() < 1) {
+            return null;
+        }
+
+        Coordinate nearest = rooms.get(0);
+        for (Coordinate location : rooms) {
+            double distNear = Coordinate.distance(nearest, new Coordinate(x, y));
+            double distCoord = Coordinate.distance(location, new Coordinate(x, y));
+            
+            if(distCoord < distNear){
+                nearest = location;
+            }
+        }
+        
+        return nearest;
+    }
+    
+    Coordinate getNearest(Coordinate... exclude) {
+        List<Coordinate> rooms = map.getMapPoints();
+        rooms.addAll(map.getMapTransferPoints());
+
+        List<Coordinate> ignoreList = new ArrayList<>();
+        for(Coordinate coord: exclude){
+            ignoreList.add(coord);
+        }
+        
+        Coordinate lastNode = ignoreList.get(ignoreList.size()-1);
+        
+        rooms.removeAll(ignoreList);
+        
+        if (rooms.size() < 1) {
+            return null;
+        }
+
+        Coordinate nearest = rooms.get(0);
+        for (Coordinate location : rooms) {
+            double distNear = Coordinate.distance(nearest, lastNode);
+            double distCoord = Coordinate.distance(location, lastNode);
+            
+            if(distCoord < distNear){
+                nearest = location;
+            }
+        }
+        
+        return nearest;
     }
 }

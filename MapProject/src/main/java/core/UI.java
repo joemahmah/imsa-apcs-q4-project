@@ -36,9 +36,11 @@ public class UI extends JFrame {
     private Map map;
     private MouseListener listener;
     private List<Coordinate> ralyCoordinates;
+    private List<Coordinate> snapCoordinates;
 
     public UI(int x, int y, Map map, String imageLocation) throws IOException {
         ralyCoordinates = new ArrayList<>();
+        snapCoordinates = new ArrayList<>();
 
         setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,8 +63,18 @@ public class UI extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent me) {
-//                ralyCoordinates.add(new Coordinate((int) getMousePosition().getX(),(int) getMousePosition().getY() - 30));
-                map.addPoints(new Coordinate((int) getMousePosition().getX(), (int) getMousePosition().getY()));
+                Coordinate nearest = map.getMapLogic().getNearestRoom((int) getMousePosition().getX(), (int) getMousePosition().getY());
+//                System.err.println(nearest.getX() + " " + nearest.getY());
+                
+                if(ralyCoordinates.size() > 1){
+                    ralyCoordinates = new ArrayList<>();
+                }
+                
+                ralyCoordinates.add(nearest);
+//                map.addPoints(new Coordinate((int) getMousePosition().getX(), (int) getMousePosition().getY()));
+//                syncLocations();
+
+                repaint();
             }
 
             @Override
@@ -84,6 +96,14 @@ public class UI extends JFrame {
             public void mouseExited(MouseEvent me) {
 
             }
+
+            public double getX() {
+                return getMousePosition().getX();
+            }
+
+            public double getY() {
+                return getMousePosition().getY();
+            }
         };
 
         KeyListener keyListen = new KeyListener() {
@@ -97,29 +117,48 @@ public class UI extends JFrame {
                         System.out.println(coord.getName() + ": " + coord.getX() + "," + coord.getY());
                     }
                 }
-                
-                if(ke.getKeyChar() == 's'){
+
+                if (ke.getKeyChar() == 'r') {
+
+                    map.addPoints(new Coordinate((int) getMousePosition().getX(), (int) getMousePosition().getY()));
+                    syncLocations();
+                }
+
+                if (ke.getKeyChar() == 'h') {
+
+                    map.addTransferPoints(new Coordinate((int) getMousePosition().getX(), (int) getMousePosition().getY()));
+                    syncLocations();
+                }
+
+                if (ke.getKeyChar() == 's') {
                     IO_Logic.saveMap(JOptionPane.showInputDialog("Save path:"), map);
                 }
-                
-                if(ke.getKeyChar() == 'l'){
+
+                if (ke.getKeyChar() == 'l') {
                     map = IO_Logic.loadMap(JOptionPane.showInputDialog("File location:"));
+                    syncLocations();
                 }
             }
 
             @Override
             public void keyPressed(KeyEvent ke) {
-                
+
             }
 
             @Override
             public void keyReleased(KeyEvent ke) {
-                
+
             }
         };
 
         addMouseListener(listener);
         addKeyListener(keyListen);
+    }
+
+    private void syncLocations() {
+        for (Coordinate coord : map.getMapPoints()) {
+            snapCoordinates.add(coord);
+        }
     }
 
     private void addComponents() {
@@ -134,6 +173,30 @@ public class UI extends JFrame {
         private ImagePanel(String imageLocation) throws IOException {
             mapImage = new ImageIcon(IO_Logic.loadImage(imageLocation));
             setIcon(mapImage);
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            g.drawImage(mapImage.getImage(), 0, 0, this);
+
+            g.setColor(Color.BLUE);
+            for (Coordinate coord : ralyCoordinates) {
+                g.drawRect(coord.getX(), coord.getY() - 30, 4, 4);
+                g.drawRect(coord.getX(), coord.getY() - 30, 2, 2);
+            }
+
+            g.setColor(Color.GREEN);
+            for (int x = 0; x < ralyCoordinates.size() - 1; x++) {
+
+                Coordinate start = ralyCoordinates.get(x);
+                Coordinate end = ralyCoordinates.get(x + 1);
+
+                Path path = map.getMapLogic().calcPath(start, end);
+
+                for (int i = 0; i < path.getCoords().size() - 1; i++) {
+                    g.drawLine(path.getCoords().get(i).getX(), path.getCoords().get(i).getY()-30, path.getCoords().get(i + 1).getX(), path.getCoords().get(i + 1).getY()-30);
+                }
+            }
         }
     }
 

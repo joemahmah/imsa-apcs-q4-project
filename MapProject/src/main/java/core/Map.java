@@ -22,6 +22,7 @@ public class Map implements Serializable {
 //    private Image mapImage;
     private MapLogic logic;
     private List<Coordinate> mapPoints;
+    private List<Coordinate> mapTransferPoints;
 
     private static final long serialVersionUID = 6463760593940686409L;
 
@@ -30,6 +31,7 @@ public class Map implements Serializable {
         logic.linkMap(this);
 
         mapPoints = new ArrayList<>();
+        mapTransferPoints = new ArrayList<>();
     }
 
     public void addPoints(Coordinate... points) {
@@ -45,9 +47,27 @@ public class Map implements Serializable {
             mapPoints.add(coord);
         }
     }
+    
+    public void addTransferPoints(Coordinate... points) {
+        for (Coordinate point : points) {
+            Coordinate coord;
+
+            if (point.getName() != null) {
+                coord = new Coordinate(point.getX(), point.getY(), point.getName());
+            } else {
+                coord = new Coordinate(point.getX(), point.getY(), JOptionPane.showInputDialog("Location?"));
+            }
+
+            mapTransferPoints.add(coord);
+        }
+    }
 
     public List<Coordinate> getMapPoints() {
         return mapPoints;
+    }
+    
+    public List<Coordinate> getMapTransferPoints(){
+        return mapTransferPoints;
     }
 
 //    public void addMapImage(Image mapImage) {
