@@ -203,5 +203,9 @@ public class UI extends JFrame {
             }
         }
     }
+    
+    public void load(String location){
+        map = IO_Logic.loadMap(mapLocation = location);
+    }
 
 }
