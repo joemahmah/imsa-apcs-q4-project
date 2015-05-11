@@ -202,17 +202,17 @@ public class UI extends JFrame {
                 map = IO_Logic.loadMap(mapLocation);
             }
             
-            g.setColor(Color.yellow);
-            for(Coordinate coord: map.getMapPoints()){
-                g.drawRect(coord.getX(), coord.getY() - 30, 4, 4);
-                g.drawRect(coord.getX(), coord.getY() - 30, 2, 2);
-            }
-            
-            g.setColor(Color.YELLOW);
-            for(Coordinate coord: map.getMapTransferPoints()){
-                g.drawRect(coord.getX(), coord.getY() - 30, 4, 4);
-                g.drawRect(coord.getX(), coord.getY() - 30, 2, 2);
-            }
+//            g.setColor(Color.yellow);
+//            for(Coordinate coord: map.getMapPoints()){
+//                g.drawRect(coord.getX(), coord.getY() - 30, 4, 4);
+//                g.drawRect(coord.getX(), coord.getY() - 30, 2, 2);
+//            }
+//            
+//            g.setColor(Color.YELLOW);
+//            for(Coordinate coord: map.getMapTransferPoints()){
+//                g.drawRect(coord.getX(), coord.getY() - 30, 4, 4);
+//                g.drawRect(coord.getX(), coord.getY() - 30, 2, 2);
+//            }
         }
     }
     
